@@ -1,43 +1,68 @@
-# python-mL
-!pip install mglearn
+# Iris KNN Classifier
 
-import pandas as pd
-import numpy as np
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-import mglearn
-from pandas.plotting import scatter_matrix
-from sklearn.neighbors import KNeighborsClassifier
+A beginner-friendly machine-learning project that classifies Iris flowers using a K-Nearest Neighbors (KNN) model built with scikit-learn.
 
-iris_dataset = load_iris()
-x_train, x_test, y_train, y_test = train_test_split(iris_dataset['data'], iris_dataset['target'], random_state=0)
+## Overview
 
-iris_dataframe = pd.DataFrame(x_train, columns=iris_dataset.feature_names)
-print(iris_dataframe)
-print("x_train shape:{}".format(x_train.shape))
-print("x_test shape:{}".format(x_test.shape))
-print("y_train shape:{}".format(y_train.shape))
-print("y_test shape:{}".format(y_test.shape))
+The script loads the built-in Iris dataset, splits it into training and test sets, trains a KNN classifier, predicts the species for a new flower measurement, and reports the test accuracy.
 
-grr = scatter_matrix(iris_dataframe, c=y_train, figsize=(16,16), marker='o', hist_kwds={'bins':20}, s=10, alpha=.8, cmap=mglearn.cm3)
+## Dataset
 
-knn = KNeighborsClassifier(n_neighbors=1)
-knn.fit(x_train, y_train)
-# After importing ML, fit the training data using .fit()
-# check model pass new input
+The Iris dataset contains 150 flower samples across three species:
 
-x_new = np.array([[5, 2.9, 1, 0.2]])
-print("x_new.shape: {}".format(x_new.shape))
+- Setosa
+- Versicolor
+- Virginica
 
-# Once new i/p is passed the model predicts in one of given class
-Prediction = knn.predict(x_new)
-print("Prediction: {}".format(Prediction))
+Each sample includes sepal length, sepal width, petal length, and petal width.
 
-print("prediction target name: {}".format(
-    iris_dataset['target_names'][Prediction]))
+## Tech Stack
 
-y_pred = knn.predict(x_test)
-print("Test set predictions:\n {}".format(y_pred))
+- Python
+- NumPy
+- scikit-learn
 
-print("Test set score: {:.2f}".format(np.mean(y_pred == y_test)))
-print("Test set score: {:.2f}".format(knn.score(x_test, y_test)))
+## Getting Started
+
+### Prerequisites
+
+- Python 3.9 or later
+
+### Installation
+
+```bash
+git clone https://github.com/Giga-Poorvik/iris-knn-classifier.git
+cd iris-knn-classifier
+python -m pip install -r requirements.txt
+```
+
+### Run the project
+
+```bash
+python iris_knn_classifier.py
+```
+
+The program prints a prediction for a sample flower and the model's accuracy on the held-out test set.
+
+## How It Works
+
+1. Load the Iris dataset from scikit-learn.
+2. Split the data into training and testing sets.
+3. Train a KNN classifier with three neighbors.
+4. Predict a new flower's species.
+5. Evaluate accuracy on the test data.
+
+## Project Structure
+
+```text
+iris-knn-classifier/
+├── iris_knn_classifier.py
+├── requirements.txt
+└── README.md
+```
+
+## Future Improvements
+
+- Compare KNN with other classifiers, such as logistic regression and decision trees.
+- Visualize the dataset and decision boundaries.
+- Add automated tests and model evaluation metrics.
